@@ -4,6 +4,8 @@ services:
     image: crccheck/hello-world
     expose:
       - 8000
+    networks:
+      - network_container_deploy
 
   nginx:
     container_name: nginx
@@ -16,3 +18,9 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
+    networks:
+      - network_container_deploy
+
+networks:
+  network_container_deploy:
+    driver: bridge;
